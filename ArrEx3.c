@@ -19,53 +19,34 @@ int main(void) {
 			arr[row][col] = '*';
 		}
 	}
-	int i = 0;
+
 
 	// Functional Part
-	while (1){ 
-
-
-		if (i == 10)
-			break;
-
-		random_num = rand(); 
-		remainder = random_num % 4;
+	while (1) {
 
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
-				if (remainder == 0) {
-					row++;
+				
+				random_num = rand();
+				remainder = random_num % 4;
 
-					if (row > 9) {
-						break;
-					}
-					arr[row][col] = (char)start_num;
+				switch (remainder) {
+				case 0:
+					// add code here
+					break;
+				case 1:
+					// add code here
+					break;
+				case 2:
+					// add code here
+					break;
+				case 3:
+					// add code here
+					break;
+				default:
+					printf_s("Some kind of error, number is : %d", remainder);
 				}
-				else if (remainder == 1) {
-					col++;
 
-					if (col > 9) {
-						break;
-					}
-					arr[row][col] = (char)start_num;
-				}
-				else if (remainder == 2) {
-					row--;
-					if (row < 0) {
-						break;
-					}
-					else {
-						arr[row][col] = (char)start_num;
-					}
-				}
-				else if (remainder == 3) {
-					col--;
-					if (col < 0) {
-						break;
-					}
-
-					arr[row][col] = (char)start_num;
-				}
 				start_num++;
 				printf_s("Ok");
 				break;
