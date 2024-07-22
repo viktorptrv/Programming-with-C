@@ -10,6 +10,7 @@ int main(void) {
 	int random_num;
 	int remainder;
 	int move;
+	int row_s, col_s;
 
 	srand(time(NULL));
 
@@ -32,16 +33,28 @@ int main(void) {
 
 				switch (remainder) {
 				case 0:
-					// add code here
+					row_s = row++;
+					if (row_s < 10) {
+						arr[row_s][col] = start_num;
+					}
 					break;
 				case 1:
-					// add code here
+					col_s = col++;
+					if (col_s < 10) {
+						arr[row][col_s] = start_num;
+					}
 					break;
 				case 2:
-					// add code here
+					col_s = col--;
+					if (col_s >= 0) {
+						arr[row][col_s] = start_num;
+					}
 					break;
 				case 3:
-					// add code here
+					row_s = row--;
+					if (row_s >= 0) {
+						arr[row_s][col] = start_num;
+					}
 					break;
 				default:
 					printf_s("Some kind of error, number is : %d", remainder);
@@ -54,7 +67,6 @@ int main(void) {
 			break;
 		}
 
-		i++;
 
 	}
 
