@@ -11,6 +11,7 @@ int main(void) {
 	int remainder;
 	int move;
 	int row_s, col_s;
+	int i=0;
 
 	srand(time(NULL));
 
@@ -24,6 +25,9 @@ int main(void) {
 
 	// Functional Part
 	while (1) {
+		if (i == 10) {
+			break;
+		}
 
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
@@ -35,25 +39,29 @@ int main(void) {
 				case 0:
 					row_s = row++;
 					if (row_s < 10) {
-						arr[row_s][col] = start_num;
+						if (arr[row_s][col] == '*')
+							arr[row_s][col] = (char) start_num;
 					}
 					break;
 				case 1:
 					col_s = col++;
 					if (col_s < 10) {
-						arr[row][col_s] = start_num;
+						if (arr[row][col_s] == '*')
+							arr[row][col_s] = (char) start_num;
 					}
 					break;
 				case 2:
 					col_s = col--;
 					if (col_s >= 0) {
-						arr[row][col_s] = start_num;
+						if (arr[row][col_s] == '*')
+							arr[row][col_s] = (char) start_num;
 					}
 					break;
 				case 3:
 					row_s = row--;
 					if (row_s >= 0) {
-						arr[row_s][col] = start_num;
+						if(arr[row_s][col] == '*')
+							arr[row_s][col] = (char) start_num;
 					}
 					break;
 				default:
@@ -61,12 +69,12 @@ int main(void) {
 				}
 
 				start_num++;
-				printf_s("Ok");
 				break;
 			}
 			break;
 		}
 
+		i++;
 
 	}
 
