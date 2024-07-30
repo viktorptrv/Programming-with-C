@@ -20,44 +20,102 @@ void print_phones(void);
 void generate_id(void);
 void generate_age(void);
 void generate_phones(void);
+void print_actions(void);
+void change_id(void);
+void change_age(void);
+void change_number(void);
+void block_id(void);
 
 
 int main(void) {
 	int var;
 	char ch;
+	int n = 1;
+	int char_to_int;
 
 	printf_s("This is a Contact Managing System.\nDo you want to proceed? y/n: ");
 	ch = getchar();
 
 	if (ch == 'y') {
-		while (1) {
 
-			printf_s("\nWhat do you want to print?\n");
-			printf_s("ID - 1; Phones - 2; Age - 3 -> ");
+		printf_s("\nWhat do you want to print?\n");
+		printf_s("ID - 1; Phones - 2; Age - 3 -> ");
 
-			scanf_s("%d", &var);
+		scanf_s("%d", &var);
 
-			switch (var) {
-			case 1:
-				print_id();
+		switch (var) {
+		case 1:
+			print_id();
+			break;
+		case 2:
+			print_phones();
+			break;
+		case 3:
+			print_age();
+			break;
+		default:
+			printf_s("There was a mistake!\n");
+			break;
+		}
+	}
+
+	printf_s("Do you want to proceed with manipulations? y/n: ");
+	scanf_s(" %c", &ch);
+	
+	if (ch == 'y') {
+		while (ch != 'n') {
+			print_actions();
+			scanf_s(" %c", &ch);
+
+			char_to_int = (int)ch;
+
+			switch (char_to_int) {
+			case 97:
+				change_id();
 				break;
-			case 2:
-				print_phones();
+			case 98:
+				change_age();
 				break;
-			case 3:
-				print_age();
+			case 99:
+				change_number();
+				break;
+			case 100:
+				block_id();
 				break;
 			default:
-				printf_s("There was a mistake!\n");
+				printf_s("\nNo such action!\n");
 				break;
 			}
-
 		}
 	}
 
 	printf_s("\nBye bye...\n");
 
 	return 0;
+}
+
+void change_id(void) {
+
+}
+
+void change_age(void) {
+
+}
+
+void change_number(void) {
+
+}
+
+void block_id(void) {
+
+}
+
+void print_actions(void) {
+	printf_s("Possible Actions are:\na) Delete an ID - you will also delete the corresponding phones and ages\n");
+	printf_s("b) Change an ID\n");
+	printf_s("c) Change Age\n");
+	printf_s("d) Change phone number\n");
+	printf_s("e) Block ID\nChoose action: ");
 }
 
 void print_id(void) {
@@ -99,7 +157,7 @@ void print_age(void) {
 	if (n == 0) {
 		printf_s("No Ages! Do you want to generate ages? y/n: \n");
 		scanf_s(" %c", &character);
-		if (character == 'y'){
+		if (character == 'y') {
 			generate_age();
 			printf_s("Ages are:\n");
 			for (int i = 0; i < MAX_NUM; i++) {
@@ -113,7 +171,7 @@ void generate_age(void) {
 	int r;
 
 	srand(time(NULL));
-	
+
 	for (int i = 0; i < MAX_NUM; i++) {
 		r = rand() % MAX_NUM;
 		age[i] = r;
@@ -131,7 +189,7 @@ void print_phones(void) {
 	if (n == 0) {
 		printf_s("No phones! Do you want to generate phones? y/n: \n");
 		scanf_s(" %c", &character);
-		if (character == 'y'){
+		if (character == 'y') {
 			generate_phones();
 			printf_s("Phones are:\n");
 			for (int i = 0; i < MAX_NUM; i++) {
