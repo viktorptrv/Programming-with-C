@@ -42,3 +42,46 @@ double inner_product(const double* a, const double* b, int n) {
 
 
 // EX 2
+// Find largest and second largest number
+#include <stdio.h>
+
+#define N 10
+void find_two_largest(const int* a, int n, int* largest, int* second_largest);
+
+int main(void) {
+	int arr[N];
+	int* largest;
+	int* sec_largest;
+
+	for (int i = 0; i < N; i++) {
+		scanf_s("%d", &arr[i]);
+	}
+
+	find_two_largest(&arr, N, &largest, &sec_largest);
+
+	printf_s("Largest: %d\n", largest);
+	printf_s("Second Largest: %d\n", sec_largest);
+
+	return 0;
+}
+
+void find_two_largest(const int* a, int n, int* largest, int* second_largest) {
+    if (a[0] > a[1]) {
+        *largest = a[0];
+        *second_largest = a[1];
+    }
+    else {
+        *largest = a[1];
+        *second_largest = a[0];
+    }
+
+    for (int i = 2; i < n; i++) {
+        if (a[i] > *largest) {
+            *second_largest = *largest;
+            *largest = a[i];
+        }
+        else if (a[i] > *second_largest) {
+            *second_largest = a[i];
+        }
+    }
+}
