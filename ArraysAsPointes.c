@@ -85,3 +85,61 @@ void find_two_largest(const int* a, int n, int* largest, int* second_largest) {
         }
     }
 }
+
+//EX 3
+// Write a program that reads a message, then checks whether its a palindrome.
+// Ignore all characters that arent letters. 
+#include <stdio.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+#define N 5
+int check_if_palindrome(const char* arr);
+
+int main() {
+	char arr[N];
+	char ch;
+	int count = 0;
+	int* counter;
+	int result = 0;
+
+	counter = &count;
+
+	printf_s("Enter a message:");
+
+	while (*counter < N) {
+		scanf_s(" %c", &ch);
+		if (isalpha(ch)) {
+			arr[*counter] = ch;
+			*counter += 1;
+		}
+	}
+
+	result = check_if_palindrome(&arr[0]);
+	
+	if (result == 1)
+		printf_s("\nIt's a palindrome!");
+	else
+		printf_s("\nIt's not a palindrome!");
+
+	return 0;
+}
+
+int check_if_palindrome(const char* arr) {
+	char reversed_arr[N];
+	char temp;
+	bool palindrome = false;
+	
+	for (int i = 0; i < N; i++) {
+		temp = *(arr + i);
+		reversed_arr[N-1-i] = temp;
+	}
+
+	for (int i = 0; i < N; i++) {
+		if (tolower(*(arr + i)) != tolower(reversed_arr[i])) {
+			return 0;
+		}
+	}
+	return 1;
+		
+}
