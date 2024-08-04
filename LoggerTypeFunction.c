@@ -1,76 +1,42 @@
-// Creating a Logger like function
-
+#define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <string.h>
 
-char* type_of_log[1];
+char type_of_log[50];
 char log_name[50];
 char log_message[100];
 int log_level = 0;
+FILE* fptr;
 
-char* logger_types[] = {"error", "debug", "info",
-					"warning", "critical" };
-
-void logger(char* type, int level, char* name, char* message);
-void debug(int level, char* name, char* message);
-void info(int level, char* name, char* message);
-void warning(int level, char* name, char* message);
-void error(int level, char* name, char* message);
-void critical(int level, char* name, char* message);
-
-void logger(char* type, int level, char* name, char* message) {
-	if (strcmp(logger_types[0], type) == 0) {
-		printf_s("Its an error logger");
-	}
-	if (strcmp(logger_types[1], type) == 0) {
-		printf_s("Its an debug logger");
-	}
-	if (strcmp(logger_types[2], type) == 0) {
-		printf_s("Its an info logger");
-	}
-	if (strcmp(logger_types[3], type) == 0) {
-		printf_s("Its an warning logger");
-	}
-	if (strcmp(logger_types[4], type) == 0) {
-		printf_s("Its an critical logger");
-	}
-}
-
-void debug(int level, char* name, char* message) {
-
-}
-
-void info(int level, char* name, char* message) {
-
-}
-
-void warning(int level, char* name, char* message) {
-
-}
-
-void error(int level, char* name, char* message) {
-
-}
-
-void critical(int level, char* name, char* message) {
-
+void logger(const char* type, int level, const char* name, const char* message) {
+    fptr = fopen("logging.txt", "a");
+    if (fptr == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+    fprintf(fptr, "%s: Level-%d; Name: %s; Message: %s\n", type, level, name, message);
+    fclose(fptr);
 }
 
 int main(void) {
+    printf("Enter log type: ");
+    fgets(type_of_log, sizeof(type_of_log), stdin);
+    type_of_log[strcspn(type_of_log, "\n")] = 0; // Remove the newline character
 
-	printf_s("Enter log type: ");
-	fgets(type_of_log, 8, stdin);
+    printf("Enter log name: ");
+    fgets(log_name, sizeof(log_name), stdin);
+    log_name[strcspn(log_name, "\n")] = 0; 
 
-	printf_s("\nEnter log name: ");
-	fgets(log_name, 50, stdin);
+    printf("Enter log message: ");
+    fgets(log_message, sizeof(log_message), stdin);
+    log_message[strcspn(log_message, "\n")] = 0;
 
-	printf_s("\nEnter log message: ");
-	fgets(log_message, 100, stdin);
+    printf("Enter log level: ");
+    scanf("%d", &log_level);
 
-	printf_s("\nEnter log level: ");
-	scanf_s("%d", &log_level);
+    logger(type_of_log, log_level, log_name, log_message);
 
-	logger(&type_of_log, log_level, &log_name, &log_message);
+    printf("Logging is done!\n");
 
-	printf_s("\nLogging is done!");
+    return 0;
 }
