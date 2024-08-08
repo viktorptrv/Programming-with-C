@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+
+int main(void) {
+	char* months[12] = { "January", "February", "March",
+						"April", "May", "June",
+						"July", "August", "September",
+						"October", "November", "December" };
+	int day, month, year;
+
+	printf_s("\nEnter a date:");
+	scanf_s("%d/%d/%d", &day, &month, &year);
+	
+	while (day != 0) {
+		printf_s("You entered the date %s %d, %d ", months[month-1], day, year);
+
+		printf_s("\nEnter a date:");
+		scanf_s("%d/%d/%d", &day, &month, &year);
+	}
+	return 0;
+}
